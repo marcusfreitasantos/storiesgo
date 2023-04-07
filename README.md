@@ -11,7 +11,7 @@ This application is a mobile app that I made using React Native CLI. This app us
 - Trial period for 7 days since account registration;
 
 ## Built with
-React Native | Styled Components
+React Native | Styled Components | Axios
 
 ## Deploy
 The app is available on PlayStore: https://play.google.com/store/apps/details?id=com.storiesgo
