@@ -18,6 +18,8 @@ export const TextInput = styled.TextInput`
     color: ${theme.colors.grayDark};
     width: 100%;
     opacity: ${props => (props.editable ? '1' : '0.5')};
+    font-size: 16px;
+    font-family: ${theme.font.family.semibold};
   `}
 `;
 

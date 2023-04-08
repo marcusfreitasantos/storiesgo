@@ -36,7 +36,7 @@ export default function Dashboard() {
         console.log('req2', req);
         setStories(req);
         await AsyncStorage.setItem(
-          `stories_${userInfo.name}_${completeCurrentDate}`,
+          `stories_${userInfo.email}_${completeCurrentDate}`,
           req,
         );
       } catch (err) {
@@ -48,7 +48,7 @@ export default function Dashboard() {
 
     const checkCurrentDate = async () => {
       const currentStories = await AsyncStorage.getItem(
-        `stories_${userInfo.name}_${completeCurrentDate}`,
+        `stories_${userInfo.email}_${completeCurrentDate}`,
       );
 
       if (currentStories && currentStories !== null) {
@@ -60,7 +60,7 @@ export default function Dashboard() {
 
     checkCurrentDate();
     setRefreshing(false);
-  }, [userCategory.name, userInfo.name, refreshing, userInfo.date_at_created]);
+  }, [userCategory.name, userInfo.email, refreshing, userInfo.date_at_created]);
 
   return (
     <S.Container>

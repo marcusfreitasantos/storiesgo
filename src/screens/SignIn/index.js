@@ -56,13 +56,12 @@ export default function SignIn() {
     setLoading(true);
     try {
       const login = await loginUser(email, password);
-      const token = await login.data.AccessToken;
+      const token = await login.AccessToken;
       setToken(token);
 
       if (login) {
         const userObj = await getUserByEmail(token, email);
         setUserInfo(userObj);
-        console.log('ok');
 
         const currentSubscription = await getAvailablePurchases();
 
