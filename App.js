@@ -10,7 +10,7 @@ export default () => {
   try {
     initConnection();
   } catch (err) {
-    console.log('erro:', err);
+    console.log('erro de inicialização:', err);
   }
 
   return (

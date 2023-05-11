@@ -9,7 +9,7 @@ import AnimatedViewToLeft from '../../components/AnimatedViewToLeft';
 import ScreenHeader from '../../components/ScreenHeader';
 import {View} from 'react-native';
 
-export default function Config() {
+export default function Profile() {
   const {userInfo} = useContext(GlobalContext);
 
   const Logout = async () => {

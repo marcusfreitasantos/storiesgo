@@ -1,28 +1,23 @@
 import React, {useState, useEffect, useContext} from 'react';
 import * as S from './styles';
-import purchaseBG from '../../../assets/images/purchase-bg.jpg';
-import {Award} from 'react-native-feather';
-import theme from '../../global/styles/theme';
+import {DollarSign} from 'react-native-feather';
 import PlanBox from '../../components/PlanBox';
 import {Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {GlobalContext} from '../../contexts/UserInfo';
+import ScreenHeader from '../../components/ScreenHeader';
+import AnimatedViewToLeft from '../../components/AnimatedViewToLeft';
 
 import {
   getSubscriptionsPlan,
   purchaseNewSubscription,
 } from '../../services/purchase';
 
-import {
-  purchaseUpdatedListener,
-  purchaseErrorListener,
-  endConnection,
-} from 'react-native-iap';
+import {purchaseErrorListener, endConnection} from 'react-native-iap';
 
-export default function Purchase() {
+export default function Plans() {
   const {token, userInfo} = useContext(GlobalContext);
   const navigation = useNavigation();
-  const iconSize = 30;
   const [btnActive, setBtnActive] = useState('sg_499_1a');
   const [products, setProducts] = useState([]);
 
@@ -34,12 +29,6 @@ export default function Purchase() {
 
     getProducts();
 
-    const purchaseUpdate = purchaseUpdatedListener(async purchase => {
-      if (purchase) {
-        navigation.navigate('Dashboard');
-      }
-    });
-
     const purchaseError = purchaseErrorListener(error => {
       if (error.responseCode !== '2') {
         Alert.alert('Compra cancelada', 'Tente novamente.');
@@ -47,12 +36,6 @@ export default function Purchase() {
     });
 
     return () => {
-      try {
-        purchaseUpdate.remove();
-      } catch (err) {
-        console.log('purchaseUpdatedListener', err);
-      }
-
       try {
         purchaseError.remove();
       } catch (err) {
@@ -67,59 +50,21 @@ export default function Purchase() {
     };
   }, [navigation, token, userInfo.email, userInfo.name, userInfo.password]);
 
-  const newSubscription = (productID, offerToken) => {
+  const newSubscription = async (productID, offerToken) => {
     setBtnActive(productID);
-    purchaseNewSubscription(productID, offerToken);
+    const purchaseResponse = await purchaseNewSubscription(
+      productID,
+      offerToken,
+    );
+    if (purchaseResponse[0]?.transactionReceipt) {
+      Alert.alert('Assinatura Confirmada!', 'Seu app está liberado para uso.');
+    }
   };
 
   return (
-    <S.Background source={purchaseBG} resizeMode="cover">
-      <S.Container>
-        <S.TextGroup>
-          <S.Title>Torne-se um mestre dos stories por apenas R$4,99!</S.Title>
-          <S.Text>
-            Eleve sua influência a um novo patamar, assine agora e tenha ideias
-            ilimitadas de conteúdo para suas postagens.
-          </S.Text>
-        </S.TextGroup>
-
-        <S.Divisor />
-
-        <S.Advantages__wrapper>
-          <Award
-            stroke={theme.colors.secondary}
-            height={iconSize}
-            width={iconSize}
-          />
-          <S.Advantages__text>
-            Receba 3 dicas exclusivas de conteúdo todos os dias.
-          </S.Advantages__text>
-        </S.Advantages__wrapper>
-
-        <S.Advantages__wrapper>
-          <Award
-            stroke={theme.colors.secondary}
-            height={iconSize}
-            width={iconSize}
-          />
-          <S.Advantages__text>
-            Salve suas ideias e compartilhe em qualquer app de mensagens.
-          </S.Advantages__text>
-        </S.Advantages__wrapper>
-
-        <S.Advantages__wrapper>
-          <Award
-            stroke={theme.colors.secondary}
-            height={iconSize}
-            width={iconSize}
-          />
-          <S.Advantages__text>
-            Nunca mais fique sem ideias para suas postagens!
-          </S.Advantages__text>
-        </S.Advantages__wrapper>
-
-        <S.Divisor />
-
+    <S.Container>
+      <AnimatedViewToLeft>
+        <ScreenHeader Icon={DollarSign} ScreenTitle={'Planos'} />
         <S.Subscriptions__wrapper>
           <S.Subscriptions__title>
             Escolha um plano de pagamento
@@ -155,7 +100,7 @@ export default function Purchase() {
           Os planos são renovados automaticamente. Altere os planos ou cancele a
           qualquer momento nas configurações da sua loja.
         </S.Disclaimer>
-      </S.Container>
-    </S.Background>
+      </AnimatedViewToLeft>
+    </S.Container>
   );
 }

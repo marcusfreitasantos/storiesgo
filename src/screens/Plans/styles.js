@@ -3,17 +3,15 @@ import {Dimensions} from 'react-native';
 
 const screenWidth = Dimensions.get('window').width;
 
-export const Background = styled.ImageBackground`
-  width: 100%;
-  display: flex;
-  flex: 1;
-`;
-
 export const Container = styled.View`
-  width: ${screenWidth}px;
-  padding: 20px;
-  flex-direction: column;
-  justify-content: space-between;
+  ${({theme}) => css`
+    width: ${screenWidth}px;
+    padding: 20px;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: ${theme.colors.primary};
+    flex: 1;
+  `}
 `;
 
 export const TextGroup = styled.View`

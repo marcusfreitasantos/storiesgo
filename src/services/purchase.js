@@ -14,10 +14,11 @@ export const getSubscriptionsPlan = async () => {
 
 export const purchaseNewSubscription = async (sku, offerToken) => {
   try {
-    await requestSubscription({
+    const purchaseResponse = await requestSubscription({
       sku,
       ...(offerToken && {subscriptionOffers: [{sku, offerToken}]}),
     });
+    return purchaseResponse;
   } catch (err) {
     console.log('erro na compra', err.message);
     return err;

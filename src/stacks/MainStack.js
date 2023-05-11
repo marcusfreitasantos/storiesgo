@@ -2,8 +2,9 @@ import React from 'react';
 import SignIn from '../screens/SignIn';
 import SignUp from '../screens/SignUp';
 import Dashboard from '../screens/Dashboard';
-import Config from '../screens/Config';
+import Profile from '../screens/Profile';
 import Purchase from '../screens/Purchase';
+import Plans from '../screens/Plans';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 const Tab = createBottomTabNavigator();
 import theme from '../global/styles/theme';
@@ -27,7 +28,7 @@ export default () => (
             Icon = Home;
             break;
 
-          case 'Config':
+          case 'Profile':
             Icon = User;
             break;
 
@@ -49,13 +50,15 @@ export default () => (
       component={SignIn}
       options={{tabBarButton: () => null, tabBarStyle: {display: 'none'}}}
     />
+
+    <Tab.Screen name="Dashboard" component={Dashboard} />
+    <Tab.Screen name="Profile" component={Profile} />
+    <Tab.Screen name="Plans" component={Plans} />
     <Tab.Screen
       name="Purchase"
       component={Purchase}
       options={{tabBarButton: () => null, tabBarStyle: {display: 'none'}}}
     />
-    <Tab.Screen name="Dashboard" component={Dashboard} />
-    <Tab.Screen name="Config" component={Config} />
     <Tab.Screen
       name="SignUp"
       component={SignUp}

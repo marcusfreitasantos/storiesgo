@@ -102,7 +102,11 @@ export default function SignIn() {
       <HeaderLogo />
 
       {loading ? (
-        <ActivityIndicator size="large" color={theme.colors.primary} />
+        <ActivityIndicator
+          size="large"
+          color={theme.colors.primary}
+          style={{flex: 1}}
+        />
       ) : (
         <AnimatedViewToUp>
           <S.FormWrapper>
@@ -132,13 +136,15 @@ export default function SignIn() {
         </AnimatedViewToUp>
       )}
 
-      <TouchableOpacity
-        onPress={() => goToSignUp()}
-        disabled={loading ? true : false}>
-        <S.primaryButtonLinkText>
-          Não tem conta? Cadastre-se
-        </S.primaryButtonLinkText>
-      </TouchableOpacity>
+      {!loading && (
+        <TouchableOpacity
+          onPress={() => goToSignUp()}
+          disabled={loading ? true : false}>
+          <S.primaryButtonLinkText>
+            Não tem conta? Cadastre-se
+          </S.primaryButtonLinkText>
+        </TouchableOpacity>
+      )}
     </S.Container>
   );
 }
