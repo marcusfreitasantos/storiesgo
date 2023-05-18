@@ -64,3 +64,5 @@ buck-out/
 /vendor/bundle/
 
 .env
+/android/sentry.properties
+/ios/sentry.properties
