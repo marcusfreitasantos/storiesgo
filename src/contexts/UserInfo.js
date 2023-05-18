@@ -5,6 +5,8 @@ export const GlobalContext = createContext({});
 export function InfoProvider({children}) {
   const [userInfo, setUserInfo] = useState('');
   const [token, setToken] = useState('');
+  const [trialPeriod, setTrialPeriod] = useState(0);
+  const [subscriptionStatus, setSubscriptionStatus] = useState(false);
 
   return (
     <GlobalContext.Provider
@@ -13,6 +15,10 @@ export function InfoProvider({children}) {
         setUserInfo,
         token,
         setToken,
+        trialPeriod,
+        setTrialPeriod,
+        subscriptionStatus,
+        setSubscriptionStatus,
       }}>
       {children}
     </GlobalContext.Provider>

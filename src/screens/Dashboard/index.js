@@ -5,22 +5,23 @@ import theme from '../../global/styles/theme';
 import DailyTip from '../../components/DailyTip';
 import {TouchableOpacity, Linking, RefreshControl} from 'react-native';
 import {GlobalContext} from '../../contexts/UserInfo';
-import GetCurrentDate from '../../hooks/GetCurrentDate';
+import UseGetCurrentDate from '../../hooks/UseGetCurrentDate';
 import AnimatedViewToRight from '../../components/AnimatedViewToRight';
 import DailyTipShimmerEffect from '../../components/DailyTipShimmerEffect';
 import {Container} from '../../global/styles/global';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {postOpenAI} from '../../services/requests/openAI';
+import WarningBar from '../../components/WarningBar';
 
 export default function Dashboard() {
   const [refreshing, setRefreshing] = useState(false);
-  const {userInfo} = useContext(GlobalContext);
+  const {userInfo, trialPeriod, subscriptionStatus} = useContext(GlobalContext);
   const [stories, setStories] = useState();
   const [loading, setLoading] = useState(false);
   const userCategory = userInfo?.preferences_categories[0] || '';
 
   useEffect(() => {
-    const {completeCurrentDate} = GetCurrentDate(userInfo.date_at_created);
+    const {completeCurrentDate} = UseGetCurrentDate(userInfo.date_at_created);
     const request = {
       model: 'text-davinci-003',
       prompt: `Me dê 3 novas sugestões de conteúdo para eu postar hoje nos stories do meu instagram sobre ${userCategory.name}. Separe cada uma em 1 parágrafo com uma quebra de linha entre eles.`,
@@ -64,6 +65,8 @@ export default function Dashboard() {
 
   return (
     <S.Container>
+      {trialPeriod <= 7 && !subscriptionStatus && <WarningBar />}
+
       <AnimatedViewToRight>
         <S.ScrollView
           refreshControl={
@@ -81,10 +84,10 @@ export default function Dashboard() {
               </S.Header__userInfo>
 
               <TouchableOpacity
-                title="support@example.com"
+                title="storiesgoapp@gmail.com"
                 onPress={() =>
                   Linking.openURL(
-                    'mailto:support@example.com?subject=Preciso de Suporte com o aplicativo',
+                    'mailto:storiesgoapp@gmail.com?subject=Preciso de Suporte com o aplicativo',
                   )
                 }>
                 <HelpCircle

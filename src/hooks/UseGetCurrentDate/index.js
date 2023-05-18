@@ -1,4 +1,4 @@
-export default function GetCurrentDate(userCreationDate) {
+export default function UseGetCurrentDate(userCreationDate) {
   const newDate = new Date();
   const currentDay = newDate.getDate();
   const currentMonth = newDate.getMonth() + 1;

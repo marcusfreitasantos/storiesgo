@@ -18,36 +18,34 @@ export default function CategorySelect({onChange}) {
   const categoriesList = segmentList.segments || [];
 
   return (
-    <>
-      <S.Dropdown__menuWrapper>
-        <S.Dropdown__btn onPress={() => setMenuActive(!menuActive)}>
-          <S.Icon>
-            <Box width={24} color={theme.colors.primary} />
-          </S.Icon>
+    <S.Dropdown__menuWrapper>
+      <S.Dropdown__btn onPress={() => setMenuActive(!menuActive)}>
+        <S.Icon>
+          <Box width={24} color={theme.colors.primary} />
+        </S.Icon>
 
-          <S.Dropdown__btnText>
-            {currentCategory ? currentCategory : 'Escolha um segmento'}{' '}
-          </S.Dropdown__btnText>
-        </S.Dropdown__btn>
+        <S.Dropdown__btnText>
+          {currentCategory ? currentCategory : 'Escolha um segmento'}{' '}
+        </S.Dropdown__btnText>
+      </S.Dropdown__btn>
 
-        {menuActive && (
-          <S.Dropdown__menu>
-            {categoriesList && (
-              <FlatList
-                data={categoriesList}
-                renderItem={item => (
-                  <S.Dropdown__item
-                    key={item.slug}
-                    onPress={() => handleChangeCategory(item)}>
-                    <S.Dropdown__btnText>{item.item.name}</S.Dropdown__btnText>
-                  </S.Dropdown__item>
-                )}
-                keyExtractor={category => category.slug}
-              />
-            )}
-          </S.Dropdown__menu>
-        )}
-      </S.Dropdown__menuWrapper>
-    </>
+      {menuActive && (
+        <S.Dropdown__menu>
+          {categoriesList && (
+            <FlatList
+              data={categoriesList}
+              renderItem={item => (
+                <S.Dropdown__item
+                  key={item.slug}
+                  onPress={() => handleChangeCategory(item)}>
+                  <S.Dropdown__btnText>{item.item.name}</S.Dropdown__btnText>
+                </S.Dropdown__item>
+              )}
+              keyExtractor={category => category.slug}
+            />
+          )}
+        </S.Dropdown__menu>
+      )}
+    </S.Dropdown__menuWrapper>
   );
 }

@@ -1,7 +1,7 @@
 export default {
   segments: [
     {
-      name: 'Arte de Design',
+      name: 'Arte e Design',
       slug: 'arte-e-design',
     },
     {
@@ -17,12 +17,12 @@ export default {
       slug: 'fotografia',
     },
     {
-      name: 'Moda e Estilo de Vida',
-      slug: 'moda-e-estilo-de-vida',
+      name: 'Moda e Estilo',
+      slug: 'moda-e-estilo',
     },
     {
-      name: 'Negócios e Empreendedorismo',
-      slug: 'negocios-e-empreendedorismo',
+      name: 'Empreendedorismo',
+      slug: 'empreendedorismo',
     },
     {
       name: 'Nutrição',

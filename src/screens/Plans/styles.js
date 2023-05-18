@@ -92,3 +92,18 @@ export const Disclaimer = styled.Text`
     text-align: center;
   `}
 `;
+
+export const LogoutBtn__wrapper = styled.TouchableOpacity`
+  flex-direction: row;
+  align-items: center;
+  margin-top: 40px;
+`;
+
+export const LogoutBtn__text = styled.Text`
+  ${({theme}) => css`
+    font-family: ${theme.font.family.normal};
+    color: ${theme.colors.white};
+    font-size: 16px;
+    margin-left: 10px;
+  `}
+`;

@@ -53,7 +53,11 @@ export default () => (
 
     <Tab.Screen name="Dashboard" component={Dashboard} />
     <Tab.Screen name="Profile" component={Profile} />
-    <Tab.Screen name="Plans" component={Plans} />
+    <Tab.Screen
+      name="Plans"
+      component={Plans}
+      options={{tabBarButton: () => null, tabBarStyle: {display: 'none'}}}
+    />
     <Tab.Screen
       name="Purchase"
       component={Purchase}

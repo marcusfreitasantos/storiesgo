@@ -11,12 +11,13 @@ import {loginUser, getUserByEmail} from '../../services/requests/user';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import HeaderLogo from '../../components/HeaderLogo';
 import AnimatedViewToUp from '../../components/AnimatedViewToUp';
-import GetCurrentDate from '../../hooks/GetCurrentDate';
+import UseGetCurrentDate from '../../hooks/UseGetCurrentDate';
 
 import {endConnection, getAvailablePurchases} from 'react-native-iap';
 
 export default function SignIn() {
-  const {setToken, setUserInfo} = useContext(GlobalContext);
+  const {setToken, setUserInfo, setTrialPeriod, setSubscriptionStatus} =
+    useContext(GlobalContext);
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
 
@@ -27,7 +28,10 @@ export default function SignIn() {
     userCreationDate,
     subscriptionStatus,
   ) => {
-    const {userTrialPeriod} = GetCurrentDate(userCreationDate);
+    const {userTrialPeriod} = UseGetCurrentDate(userCreationDate);
+
+    setTrialPeriod(userTrialPeriod);
+    setSubscriptionStatus(subscriptionStatus);
 
     if (userTrialPeriod > 7 && !subscriptionStatus) {
       navigation.navigate('Purchase');

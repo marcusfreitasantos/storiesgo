@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
 import * as S from './styles';
-import {DollarSign} from 'react-native-feather';
+import {DollarSign, CornerDownLeft} from 'react-native-feather';
+
 import PlanBox from '../../components/PlanBox';
 import {Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
@@ -14,9 +15,10 @@ import {
 } from '../../services/purchase';
 
 import {purchaseErrorListener, endConnection} from 'react-native-iap';
+import theme from '../../global/styles/theme';
 
 export default function Plans() {
-  const {token, userInfo} = useContext(GlobalContext);
+  const {token, userInfo, setSubscriptionStatus} = useContext(GlobalContext);
   const navigation = useNavigation();
   const [btnActive, setBtnActive] = useState('sg_499_1a');
   const [products, setProducts] = useState([]);
@@ -56,8 +58,11 @@ export default function Plans() {
       productID,
       offerToken,
     );
-    if (purchaseResponse[0]?.transactionReceipt) {
-      Alert.alert('Assinatura Confirmada!', 'Seu app está liberado para uso.');
+    if (purchaseResponse[0]) {
+      navigation.navigate('Dashboard');
+      setSubscriptionStatus(true);
+    } else {
+      console.log('Compra cancelada.');
     }
   };
 
@@ -100,6 +105,13 @@ export default function Plans() {
           Os planos são renovados automaticamente. Altere os planos ou cancele a
           qualquer momento nas configurações da sua loja.
         </S.Disclaimer>
+
+        <S.LogoutBtn__wrapper>
+          <CornerDownLeft width={24} height={24} stroke={theme.colors.white} />
+          <S.LogoutBtn__text onPress={() => navigation.goBack()}>
+            Voltar
+          </S.LogoutBtn__text>
+        </S.LogoutBtn__wrapper>
       </AnimatedViewToLeft>
     </S.Container>
   );
