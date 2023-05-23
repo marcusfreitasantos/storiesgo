@@ -3,12 +3,11 @@ import * as S from './styles';
 import {HelpCircle} from 'react-native-feather';
 import theme from '../../global/styles/theme';
 import DailyTip from '../../components/DailyTip';
-import {TouchableOpacity, Linking, RefreshControl} from 'react-native';
+import {TouchableOpacity, Linking} from 'react-native';
 import {GlobalContext} from '../../contexts/UserInfo';
 import UseGetCurrentDate from '../../hooks/UseGetCurrentDate';
 import AnimatedViewToRight from '../../components/AnimatedViewToRight';
 import DailyTipShimmerEffect from '../../components/DailyTipShimmerEffect';
-import {Container} from '../../global/styles/global';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {postOpenAI} from '../../services/requests/openAI';
 import WarningBar from '../../components/WarningBar';
@@ -32,9 +31,7 @@ export default function Dashboard() {
     const callOpenAI = async () => {
       setLoading(true);
       try {
-        console.log('openai');
         const req = await postOpenAI(request);
-        console.log('req2', req);
         setStories(req);
         await AsyncStorage.setItem(
           `stories_${userInfo.email}_${completeCurrentDate}`,
@@ -68,44 +65,33 @@ export default function Dashboard() {
       {trialPeriod <= 7 && !subscriptionStatus && <WarningBar />}
 
       <AnimatedViewToRight>
-        <S.ScrollView
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={() => setRefreshing(true)}
-            />
-          }>
-          <S.Header>
-            <Container>
-              <S.Header__userInfo>
-                <S.Header__UserName>
-                  Olá, {userInfo && userInfo.name}
-                </S.Header__UserName>
-              </S.Header__userInfo>
+        <S.Header>
+          <S.Header__userInfo>
+            <S.Header__UserName>
+              Olá, {userInfo && userInfo.name}
+            </S.Header__UserName>
+          </S.Header__userInfo>
 
-              <TouchableOpacity
-                title="storiesgoapp@gmail.com"
-                onPress={() =>
-                  Linking.openURL(
-                    'mailto:storiesgoapp@gmail.com?subject=Preciso de Suporte com o aplicativo',
-                  )
-                }>
-                <HelpCircle
-                  width={30}
-                  height={30}
-                  stroke={theme.colors.primaryDark}
-                />
-              </TouchableOpacity>
-            </Container>
-          </S.Header>
-        </S.ScrollView>
-        <Container>
-          {loading ? (
-            <DailyTipShimmerEffect />
-          ) : (
-            <DailyTip data={stories} userCategory={userCategory.name} />
-          )}
-        </Container>
+          <TouchableOpacity
+            title="storiesgoapp@gmail.com"
+            onPress={() =>
+              Linking.openURL(
+                'mailto:storiesgoapp@gmail.com?subject=Preciso de Suporte com o aplicativo',
+              )
+            }>
+            <HelpCircle
+              width={30}
+              height={30}
+              stroke={theme.colors.primaryDark}
+            />
+          </TouchableOpacity>
+        </S.Header>
+
+        {loading ? (
+          <DailyTipShimmerEffect />
+        ) : (
+          <DailyTip dataContent={stories} userCategory={userCategory.name} />
+        )}
       </AnimatedViewToRight>
     </S.Container>
   );

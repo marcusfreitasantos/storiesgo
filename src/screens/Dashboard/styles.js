@@ -1,17 +1,10 @@
 import styled, {css} from 'styled-components/native';
-import {Dimensions} from 'react-native';
-
-const screenWidth = Dimensions.get('window').width;
 
 export const Container = styled.View`
   ${({theme}) => css`
-    flex: 1;
     background-color: ${theme.colors.white};
+    flex: 1;
   `}
-`;
-
-export const ScrollView = styled.ScrollView`
-  width: ${screenWidth}px;
 `;
 
 export const Header = styled.View`
@@ -21,8 +14,11 @@ export const Header = styled.View`
     justify-content: space-between;
     align-items: center;
     background-color: ${theme.colors.primary};
+    padding: 20px;
   `}
 `;
+
+export const Header__wrapper = styled.View``;
 
 export const Header__userInfo = styled.View`
   display: flex;

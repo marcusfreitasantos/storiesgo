@@ -16,6 +16,8 @@ export default function DailyTipShimmerEffect() {
           <S.ImageTips source={ShimmerEffect} resizeMode="cover" />
           <S.ImageTips source={ShimmerEffect} resizeMode="cover" />
         </S.DailyTip__text>
+
+        <S.Message>Estamos gerando ideias para você!</S.Message>
       </S.DailyTip__wrapper>
     </>
   );

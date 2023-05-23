@@ -5,7 +5,12 @@ import Buttons from '../../components/Buttons';
 import {Mail, Lock} from 'react-native-feather';
 import theme from '../../global/styles/theme';
 import {useNavigation} from '@react-navigation/native';
-import {TouchableOpacity, Alert, ActivityIndicator} from 'react-native';
+import {
+  TouchableOpacity,
+  Alert,
+  ActivityIndicator,
+  Linking,
+} from 'react-native';
 import {GlobalContext} from '../../contexts/UserInfo';
 import {loginUser, getUserByEmail} from '../../services/requests/user';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -141,13 +146,26 @@ export default function SignIn() {
       )}
 
       {!loading && (
-        <TouchableOpacity
-          onPress={() => goToSignUp()}
-          disabled={loading ? true : false}>
-          <S.primaryButtonLinkText>
-            Não tem conta? Cadastre-se
-          </S.primaryButtonLinkText>
-        </TouchableOpacity>
+        <S.ButtonsWrapper>
+          <TouchableOpacity
+            onPress={() => goToSignUp()}
+            disabled={loading ? true : false}>
+            <S.PrimaryButtonLinkText>
+              Não tem conta? Cadastre-se
+            </S.PrimaryButtonLinkText>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            title="storiesgoapp@gmail.com"
+            onPress={() =>
+              Linking.openURL(
+                'mailto:storiesgoapp@gmail.com?subject=Preciso de Suporte com o aplicativo',
+              )
+            }
+            disabled={loading ? true : false}>
+            <S.HelpButtonLinkText>Precisa de Ajuda?</S.HelpButtonLinkText>
+          </TouchableOpacity>
+        </S.ButtonsWrapper>
       )}
     </S.Container>
   );

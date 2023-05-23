@@ -38,11 +38,26 @@ export const ButtonLink = styled.Text`
   `}
 `;
 
-export const primaryButtonLinkText = styled.Text`
+export const PrimaryButtonLinkText = styled.Text`
   ${({theme}) => css`
     font-size: 16px;
     color: ${theme.colors.primaryDark};
     font-family: ${theme.font.family.bold};
-    padding: 40px 0;
+    padding: 8px 0;
   `}
+`;
+
+export const HelpButtonLinkText = styled.Text`
+  ${({theme}) => css`
+    font-size: 14px;
+    color: ${theme.colors.gray};
+    font-family: ${theme.font.family.normal};
+    padding: 8px 0;
+  `}
+`;
+
+export const ButtonsWrapper = styled.View`
+  padding: 40px 0;
+  justify-content: center;
+  align-items: center;
 `;

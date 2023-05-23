@@ -40,3 +40,12 @@ export const ImageTips = styled.ImageBackground`
   margin: 5px 0;
   width: 100%;
 `;
+
+export const Message = styled.Text`
+  ${({theme}) => css`
+    font-size: 16px;
+    color: ${theme.colors.grayDark};
+    font-family: ${theme.font.family.bold};
+    text-align: center;
+  `}
+`;

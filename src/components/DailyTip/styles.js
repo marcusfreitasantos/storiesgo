@@ -10,7 +10,6 @@ export const DailyTip__title = styled.Text`
 
 export const DailyTip__wrapper = styled.View`
   width: 100%;
-  height: 600px;
 `;
 
 export const DailyTip__header = styled.View`
