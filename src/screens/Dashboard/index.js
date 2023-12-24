@@ -10,11 +10,10 @@ import AnimatedViewToRight from '../../components/AnimatedViewToRight';
 import DailyTipShimmerEffect from '../../components/DailyTipShimmerEffect';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {postOpenAI} from '../../services/requests/openAI';
-import WarningBar from '../../components/WarningBar';
 
 export default function Dashboard() {
   const [refreshing, setRefreshing] = useState(false);
-  const {userInfo, trialPeriod, subscriptionStatus} = useContext(GlobalContext);
+  const {userInfo} = useContext(GlobalContext);
   const [stories, setStories] = useState();
   const [loading, setLoading] = useState(false);
   const userCategory = userInfo?.preferences_categories[0] || '';
@@ -22,10 +21,14 @@ export default function Dashboard() {
   useEffect(() => {
     const {completeCurrentDate} = UseGetCurrentDate(userInfo.date_at_created);
     const request = {
-      model: 'text-davinci-003',
-      prompt: `Me dê 3 novas sugestões de conteúdo para eu postar hoje nos stories do meu instagram sobre ${userCategory.name}. Separe cada uma em 1 parágrafo com uma quebra de linha entre eles.`,
-      max_tokens: 1000,
-      temperature: 1,
+      model: 'gpt-3.5-turbo',
+      messages: [
+        {
+          role: 'user',
+          content: `Crie um parágrafo de até 300 caracteres com um única sugestão de assunto que eu poderia abordar em minhas redes sociais hoje sobre ${userCategory.name}.`,
+        },
+      ],
+      temperature: 0.7,
     };
 
     const callOpenAI = async () => {
@@ -35,7 +38,7 @@ export default function Dashboard() {
         setStories(req);
         await AsyncStorage.setItem(
           `stories_${userInfo.email}_${completeCurrentDate}`,
-          req,
+          JSON.stringify(req),
         );
       } catch (err) {
         console.log(err);
@@ -55,15 +58,12 @@ export default function Dashboard() {
         callOpenAI();
       }
     };
-
     checkCurrentDate();
     setRefreshing(false);
   }, [userCategory.name, userInfo.email, refreshing, userInfo.date_at_created]);
 
   return (
     <S.Container>
-      {trialPeriod <= 7 && !subscriptionStatus && <WarningBar />}
-
       <AnimatedViewToRight>
         <S.Header>
           <S.Header__userInfo>
@@ -73,10 +73,10 @@ export default function Dashboard() {
           </S.Header__userInfo>
 
           <TouchableOpacity
-            title="storiesgoapp@gmail.com"
+            title="marcusfreitasantos@gmail.com"
             onPress={() =>
               Linking.openURL(
-                'mailto:storiesgoapp@gmail.com?subject=Preciso de Suporte com o aplicativo',
+                'mailto:marcusfreitasantos@gmail.com?subject=Preciso de Suporte com o aplicativo',
               )
             }>
             <HelpCircle

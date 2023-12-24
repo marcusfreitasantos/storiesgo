@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Stories Go!</string>
+    <string name="facebook_app_id">BuildConfig.FACEBOOK_APP_ID</string><string name="facebook_client_token">BuildConfig.FACEBOOK_API_TOKEN</string>
 </resources>

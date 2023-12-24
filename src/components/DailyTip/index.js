@@ -8,7 +8,7 @@ import DropShadow from 'react-native-drop-shadow';
 import {Container} from '../../global/styles/global';
 
 export default function DailyTip({dataContent, userCategory}) {
-  const stories = dataContent?.replace('\n\n', '').split('\n\n') || [];
+  const stories = [dataContent];
 
   const copyData = () => {
     Clipboard.setString(dataContent);
@@ -45,7 +45,7 @@ export default function DailyTip({dataContent, userCategory}) {
           data={stories}
           renderItem={({item}) => (
             <DropShadow style={styles.shadowProp}>
-              <S.DailyTip__text>{item}</S.DailyTip__text>
+              <S.DailyTip__text>{item?.replaceAll('"', '')}</S.DailyTip__text>
             </DropShadow>
           )}
           keyExtractor={(item, index) => item + index}
