@@ -8,10 +8,9 @@ import {GlobalContext} from '../../contexts/UserInfo';
 import AnimatedViewToLeft from '../../components/AnimatedViewToLeft';
 import ScreenHeader from '../../components/ScreenHeader';
 import {View} from 'react-native';
-import WarningBar from '../../components/WarningBar';
 
 export default function Profile() {
-  const {userInfo, trialPeriod, subscriptionStatus} = useContext(GlobalContext);
+  const {userInfo} = useContext(GlobalContext);
 
   const Logout = async () => {
     BackHandler.exitApp();
@@ -19,7 +18,6 @@ export default function Profile() {
 
   return (
     <S.Container>
-      {trialPeriod <= 7 && !subscriptionStatus && <WarningBar />}
       <AnimatedViewToLeft>
         <S.ScrollView
           contentContainerStyle={{

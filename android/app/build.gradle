@@ -143,8 +143,8 @@ android {
         applicationId "com.storiesgo"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 11
-        versionName "2.1"
+        versionCode 13
+        versionName "2.3"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
         missingDimensionStrategy "store", "play"
         resValue "string", "build_config_package", "com.storiesgo"
