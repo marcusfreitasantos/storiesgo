@@ -21,4 +21,16 @@ React Native | Styled Components | Axios
 
 The app is available on PlayStore: https://play.google.com/store/apps/details?id=com.storiesgo
 
+## Screeshots
+
+<img
+  src="https://mafreitas.com.br/wp-content/uploads/2024/01/storiesgo_feed-1.jpg"
+  alt="Stories Go - Image 01"
+  style="display: inline-block; margin: 0 auto; max-width: 300px">
+
+<img
+  src="https://mafreitas.com.br/wp-content/uploads/2024/01/storiesgo-thumb-1.png"
+  alt="Stories Go - Image 02"
+  style="display: inline-block; margin: 0 auto; max-width: 300px">
+
 ## Thanks for watching!!
