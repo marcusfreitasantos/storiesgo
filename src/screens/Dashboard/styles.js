@@ -53,3 +53,16 @@ export const ButtonsGroup = styled.View`
   justify-content: center;
   width: 100%;
 `;
+
+export const ButtonWrapper = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const FormWrapper = styled.View`
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+`;

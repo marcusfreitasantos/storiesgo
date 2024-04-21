@@ -7,7 +7,7 @@ import Clipboard from '@react-native-clipboard/clipboard';
 import DropShadow from 'react-native-drop-shadow';
 import {Container} from '../../global/styles/global';
 
-export default function DailyTip({dataContent, userCategory}) {
+export default function DailyTip({dataContent}) {
   const stories = [dataContent];
 
   const copyData = () => {
@@ -27,9 +27,7 @@ export default function DailyTip({dataContent, userCategory}) {
     <Container>
       <S.DailyTip__wrapper>
         <S.DailyTip__header>
-          <S.DailyTip__title>
-            Dicas do Dia | {userCategory && userCategory}
-          </S.DailyTip__title>
+          <S.DailyTip__title>Dica do Dia</S.DailyTip__title>
 
           {stories && (
             <TouchableOpacity onPress={copyData}>

@@ -6,10 +6,10 @@ import Profile from '../screens/Profile';
 import Purchase from '../screens/Purchase';
 import Plans from '../screens/Plans';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-const Tab = createBottomTabNavigator();
 import theme from '../global/styles/theme';
 import {Home, User, DollarSign} from 'react-native-feather';
 import Preload from '../screens/Preload';
+const Tab = createBottomTabNavigator();
 
 export default () => (
   <Tab.Navigator
@@ -46,13 +46,20 @@ export default () => (
       options={{tabBarButton: () => null, tabBarStyle: {display: 'none'}}}
     />
     <Tab.Screen
+      name="Dashboard"
+      component={Dashboard}
+      options={{tabBarButton: () => null, tabBarStyle: {display: 'none'}}}
+    />
+    <Tab.Screen
       name="SignIn"
       component={SignIn}
       options={{tabBarButton: () => null, tabBarStyle: {display: 'none'}}}
     />
-
-    <Tab.Screen name="Dashboard" component={Dashboard} />
-    <Tab.Screen name="Profile" component={Profile} />
+    <Tab.Screen
+      name="Profile"
+      component={Profile}
+      options={{tabBarButton: () => null, tabBarStyle: {display: 'none'}}}
+    />
     <Tab.Screen
       name="Plans"
       component={Plans}

@@ -14,7 +14,7 @@ export default function Preload() {
         if (!networkState.isConnected) {
           showAlert();
         } else {
-          navigation.navigate('SignIn');
+          navigation.navigate('Dashboard');
         }
       });
     };
